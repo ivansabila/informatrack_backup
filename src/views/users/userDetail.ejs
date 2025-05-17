@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/head.ejs") %>
+</head>
+
+<body class="bg-white">
+    <div class="mainContainer flex flex-col">
+        <%- include("../partials/navbar.ejs") %>
+            <div class="flex">
+                <%- include("../partials/sidebar.ejs") %>
+                    <div class="flex flex-col ml-72 p-6 w-full gap-10">
+                        <!-- start program -->
+                        <!-- start title -->
+                        <div class="flex flex-col">
+                            <h1 class="text-3xl text-left titleSidebar font-base text-darkBlue font-semibold">
+                                Hai Admin</h1>
+                            <div class="flex flex-row items-center gap-1">
+                                <p class="text-sm font-medium font-base text-secBlue">[informasi tambahan]</p>
+                            </div>
+                        </div>
+                        <!-- end title -->
+                        <!-- start data -->
+                        <form action="/users/edit/<%= data.user.uid %>" method="post" class="flex flex-col gap-8">
+                            <div class="flex justify-between gap-8">
+                                <h1 class="font-base text-darkBlue w-96">Nama Lengkap</h1>
+                                <div class="flex flex-col flex-auto">
+                                    <input
+                                        class="border text-sm font-base flex-auto text-darkBlue bg-transparent outline-none h-10 px-4 border-grey focus:border-darkBlue"
+                                        required type="text" name="name" id="name" autocomplete="off" autofocus
+                                        value="<%= data.oldData.name ? data.oldData.name : data.user.name %>">
+                                    <p class="errorMessage text-sm font-medium font-base text-red-400">
+                                        <%= data.error.name %>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex justify-between gap-8">
+                                <h1 class="font-base text-darkBlue w-96">Nomor Induk Dosen Nasional (NIDN)</h1>
+                                <div class="flex flex-col flex-auto">
+                                    <input
+                                        class="border text-sm font-base flex-auto text-darkBlue bg-transparent outline-none h-10 px-4 border-grey focus:border-darkBlue"
+                                        required type="text" name="numberID" id="numberID" autocomplete="off"
+                                        value="<%= data.oldData.numberID ? data.oldData.numberID : data.user.numberID %>">
+                                    <p class="errorMessage text-sm font-medium font-base text-red-400">
+                                        <%= data.error.numberID %>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="flex justify-between gap-8">
+                                <div class="flex flex-col">
+                                    <h1 class="font-base text-darkBlue w-96">Email</h1>
+                                    <h1 class="font-base text-secBlue text-sm w-96">Email hanya dapat di ubah dari akun
+                                        pengguna
+                                    </h1>
+                                </div>
+                                <p
+                                    class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 h-fit leading-6 border-grey">
+                                    <%= data.user.email %>
+                                </p>
+                            </div>
+                            <div class="div flex gap-4 justify-end">
+                                <a class="flex items-center group cursor-pointer" href="/users">
+                                    <h1
+                                        class="font-base text-red-400 px-4 h-10 flex items-center border border-red-400 group-hover:bg-red-400 group-hover:text-white ">
+                                        Batal</h1>
+                                </a>
+                                <button class="flex items-center group cursor-pointer" type="submit">
+                                    <div class="flex justify-center items-center bg-darkBlue w-10 h-10">
+                                        <svg class="stroke-white" xmlns="http://www.w3.org/2000/svg" width="20"
+                                            height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-pencil-icon lucide-pencil">
+                                            <path
+                                                d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" />
+                                            <path d="m15 5 4 4" />
+                                        </svg>
+                                    </div>
+                                    <h1
+                                        class="font-base text-darkBlue px-4 h-10 flex items-center border border-grey group-hover:bg-darkBlue group-hover:text-white group-hover:border-darkBlue">
+                                        Edit Data</h1>
+                                </button>
+                            </div>
+                        </form>
+                        <!-- end data -->
+                        <!-- end program -->
+                    </div>
+            </div>
+    </div>
+    <script src="/js/moveCursorToEnd.js"></script>
+</body>
+
+</html>

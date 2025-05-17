@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/head.ejs") %>
+</head>
+
+<body class="bg-white">
+    <div class="mainContainer flex flex-col">
+        <%- include("../partials/navbar.ejs") %>
+            <div class="flex">
+                <%- include("../partials/sidebar.ejs") %>
+                    <div class="flex flex-col ml-72 p-6 w-full gap-10">
+                        <!-- start program -->
+                        <!-- start title -->
+                        <div class="flex flex-col">
+                            <h1 class="text-3xl text-left titleSidebar font-base text-darkBlue font-semibold">
+                                Hai Admin</h1>
+                            <div class="flex flex-row items-center gap-1">
+                                <p class="text-sm font-medium font-base text-secBlue">[informasi tambahan]</p>
+                            </div>
+                        </div>
+                        <!-- end title -->
+                        <!-- start data -->
+                        <div class="flex flex-col gap-6">
+                            <div class="flex flex-col gap-8">
+                                <div class="flex justify-between gap-8">
+                                    <h1 class="font-base text-darkBlue w-96 shrink-0">Judul Utama</h1>
+                                    <p
+                                        class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                        <%= data.thesis.judulUtama %>
+                                    </p>
+                                </div>
+                                <div class="flex justify-between gap-8">
+                                    <h1 class="font-base text-darkBlue w-96">Tujuan Judul Utama</h1>
+                                    <p
+                                        class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                        <%= data.thesis.tujuanUtama %>
+                                    </p>
+                                </div>
+                                <div class="flex justify-between gap-8">
+                                    <h1 class="font-base text-darkBlue w-96">Judul Cadangan Pertama</h1>
+                                    <p
+                                        class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                        <%= data.thesis.judulCadangan1 %>
+                                    </p>
+                                </div>
+                                <div class="flex justify-between gap-8">
+                                    <h1 class="font-base text-darkBlue w-96">Tujuan Judul Cadangan Pertama</h1>
+                                    <p
+                                        class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                        <%= data.thesis.tujuanCadangan1 %>
+                                    </p>
+                                </div>
+                                <div class="flex justify-between gap-8">
+                                    <h1 class="font-base text-darkBlue w-96">Judul Cadangan Kedua</h1>
+                                    <p
+                                        class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                        <%= data.thesis.judulCadangan2 %>
+                                    </p>
+                                </div>
+                                <div class="flex justify-between gap-8">
+                                    <h1 class="font-base text-darkBlue w-96">Tujuan Judul Cadangan Kedua</h1>
+                                    <p
+                                        class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                        <%= data.thesis.tujuanCadangan2 %>
+                                    </p>
+                                </div>
+                                <div class="flex justify-between gap-8">
+                                    <h1 class="font-base text-darkBlue w-96">Apakah Anda siap menyelesaikan Tugas Akhir
+                                        dalam waktu maksimal 1 Tahun ?</h1>
+                                    <p
+                                        class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                        <%= data.thesis.siapSelesaikan1Tahun %>
+                                    </p>
+                                </div>
+                                <div class="flex justify-between items-start gap-8">
+                                    <div class="flex flex-col">
+                                        <h1 class="font-base text-darkBlue w-96">Apakah Anda telah menyelesaikan mata
+                                            kuliah metodologi penelitian ?</h1>
+                                        <h1 class="font-base text-secBlue text-sm w-96">Jika belum lulus mata kuliah
+                                            tersebut maka judulnya akan dibatalkan atau ditolak</h1>
+                                    </div>
+                                    <div class="flex flex-col flex-auto">
+                                        <p
+                                            class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                            <%= data.thesis.lulusMetodologi %>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-start gap-8">
+                                    <div class="flex flex-col">
+                                        <h1 class="font-base text-darkBlue w-96">Telah menyerahkan/memperlihatkan 10
+                                            jurnal terkait judul yg diajukan ke dosen PA ?</h1>
+                                        <h1 class="font-base text-secBlue text-sm w-96">Mahasiswa Wajib mencari 10
+                                            jurnal yang berhubungan dengan usulan judul kemudian diperlihatkan dan di
+                                            tanda tangan oleh dosen PA</h1>
+                                    </div>
+                                    <div class="flex flex-col flex-auto">
+                                        <p
+                                            class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                            <%= data.thesis.jurnalTerkait %>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- start pilih judul -->
+                            <div class="flex justify-between items-start gap-8 p-6 border border-grey">
+                                <div class="flex flex-col">
+                                    <h1 class="font-base font-bold text-2xl text-darkBlue w-[22.5rem]">Pilih Judul</h1>
+                                    <h1 class="font-base text-secBlue text-sm w-[22.5rem]">Pilih salah satu judul tugas
+                                        akhir yang akan diterima, jika ketiga judul tersebut tidak sesuai maka Tolak
+                                        Judul</h1>
+                                </div>
+                                <div class="flex flex-col gap-8 w-full">
+                                    <form class="flex flex-col gap-8" action="/activity/unapproved/<%= data.thesis.uid %>" method="post">
+                                        <div class="flex flex-row w-full h-full">
+                                            <div
+                                                class="thesisOption text-sm font-base flex-auto flex text-darkBlue outline-none border-grey p-3 bg-grey cursor-pointer">
+                                                <h1 class="font-base text-white text-sm m-2">
+                                                    <%= data.thesis.judulUtama %>
+                                                </h1>
+                                            </div>
+                                            <div
+                                                class="thesisOption border-x text-sm font-base flex-auto flex text-darkBlue outline-none border-white p-3 bg-grey cursor-pointer">
+                                                <h1 class="font-base text-white text-sm m-2">
+                                                    <%= data.thesis.judulCadangan1 %>
+                                                </h1>
+                                            </div>
+                                            <div
+                                                class="thesisOption text-sm font-base flex-auto flex text-darkBlue outline-none border-grey p-3 bg-grey cursor-pointer">
+                                                <h1 class="font-base text-white text-sm m-2">
+                                                    <%= data.thesis.judulCadangan2 %>
+                                                </h1>
+                                            </div>
+                                        </div>
+                                        <input class="border hidden" type="text" name="chosenThesis" id="chosenThesis">
+                                        <div class="div flex gap-4 justify-end">
+                                            <button class="flex items-center group cursor-pointer" type="submit" name="action" value="reject">
+                                                <div class="flex justify-center items-center bg-red-400 w-10 h-10">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                        viewBox="0 0 24 24" fill="none" stroke="#f3f3f3"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="lucide lucide-ban-icon lucide-ban">
+                                                        <circle cx="12" cy="12" r="10" />
+                                                        <path d="m4.9 4.9 14.2 14.2" />
+                                                    </svg>
+                                                </div>
+                                                <h1
+                                                    class="font-base text-red-400 px-4 h-10 flex items-center border border-grey group-hover:bg-red-400 group-hover:text-white group-hover:border-red-400">
+                                                    Tolak Judul</h1>
+                                            </button>
+                                            <button id="submitThesis" class="flex items-center group cursor-pointer group" disabled type="submit" name="action" value="confirm">
+                                                <div class="flex justify-center items-center bg-darkBlue w-10 h-10 group-disabled:bg-grey">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                        viewBox="0 0 24 24" fill="none" stroke="#f3f3f3"
+                                                        stroke-width=" 2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="lucide lucide-plus-icon lucide-plus">
+                                                        <path d="M5 12h14" />
+                                                        <path d="M12 5v14" />
+                                                    </svg>
+                                                </div>
+                                                <h1
+                                                    class="font-base text-darkBlue px-4 h-10 flex items-center border border-grey group-hover:bg-darkBlue group-hover:text-white group-hover:border-darkBlue group-disabled:bg-grey group-disabled:border-grey group-disabled:text-white">
+                                                    Konfirmasi Terima Judul</h1>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+
+
+                            </div>
+                            <!-- end pilih judul -->
+                        </div>
+                        <!-- end data -->
+                        <!-- end program -->
+                    </div>
+            </div>
+    </div>
+    <script src="/js/chooseThesis.js"></script>
+</body>
+
+</html>

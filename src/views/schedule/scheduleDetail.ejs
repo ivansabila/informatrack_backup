@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/head.ejs") %>
+</head>
+
+<body class="bg-white">
+    <div class="mainContainer flex flex-col">
+        <%- include("../partials/navbar.ejs") %>
+            <div class="flex">
+                <%- include("../partials/sidebar.ejs") %>
+                    <div class="flex flex-col ml-72 p-6 w-full gap-10">
+                        <!-- start program -->
+                        <!-- start title -->
+                        <div class="flex flex-col">
+                            <h1 class="text-3xl text-left titleSidebar font-base text-darkBlue font-semibold">
+                                Hai Admin</h1>
+                            <div class="flex flex-row items-center gap-1">
+                                <p class="text-sm font-medium font-base text-secBlue">[informasi tambahan]</p>
+                            </div>
+                        </div>
+                        <!-- end title -->
+                        <!-- start data -->
+                        <p class="border text-sm font-base w-fit text-white px-4 py-2 leading-6 bg-darkBlue">
+                            Ujian <%= data.schedule.jenisUjian %>
+                        </p>
+                        <div class="flex flex-col gap-8">
+                            <div class="flex justify-between gap-8">
+                                <h1 class="font-base text-darkBlue w-96 shrink-0">Nama Lengkap</h1>
+                                <p
+                                    class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                    <%= data.schedule.name %>
+                                </p>
+                            </div>
+                            <div class="flex justify-between gap-8">
+                                <h1 class="font-base text-darkBlue w-96 shrink-0">Nomor Induk Mahasiswa (NIM)</h1>
+                                <p
+                                    class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                    <%= data.schedule.numberID %>
+                                </p>
+                            </div>
+                            <div class="flex justify-between gap-8">
+                                <h1 class="font-base text-darkBlue w-96 shrink-0">Judul Tugas Akhir</h1>
+                                <p
+                                    class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                    <%= data.schedule.judulUtama %>
+                                </p>
+                            </div>
+                            <div class="flex justify-between gap-8">
+                                <h1 class="font-base text-darkBlue w-96 shrink-0">Tujuan Judul Tugas Akhir</h1>
+                                <p
+                                    class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                    <%= data.schedule.tujuanUtama %>
+                                </p>
+                            </div>
+                            <div class="flex justify-between gap-8">
+                                <h1 class="font-base text-darkBlue w-96 shrink-0">Jadwal Ujian</h1>
+                                <p
+                                    class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                    <%= data.schedule.date %>
+                                </p>
+                            </div>
+                            <div class="flex justify-between gap-8">
+                                <h1 class="font-base text-darkBlue w-96">Dosen Pembimbing Utama</h1>
+                                <div class="flex flex-col flex-auto">
+                                    <input
+                                        class="border text-sm font-base flex-auto text-darkBlue bg-transparent outline-none h-10 px-4 border-grey"
+                                        required type="text" name="pembimbing1" id="pembimbing1" autocomplete="off"
+                                        value="<%= data.schedule.pembimbing1 %>" readonly>
+                            
+                                </div>
+                            </div>
+                            <div class="flex justify-between gap-8">
+                                <h1 class="font-base text-darkBlue w-96">Dosen Pembimbing Pendamping</h1>
+                                <div class="flex flex-col flex-auto">
+                                    <input
+                                        class="border text-sm font-base flex-auto text-darkBlue bg-transparent outline-none h-10 px-4 border-grey"
+                                        required type="text" name="pembimbing2" id="pembimbing2" autocomplete="off"
+                                        value="<%= data.schedule.pembimbing2 %>" readonly>
+                            
+                                </div>
+                            </div>
+                            <div class="flex justify-between gap-8">
+                                <h1 class="font-base text-darkBlue w-96">Dosen Penguji Pertama</h1>
+                                <div class="flex flex-col flex-auto">
+                                    <input
+                                        class="border text-sm font-base flex-auto text-darkBlue bg-transparent outline-none h-10 px-4 border-grey"
+                                        required type="text" name="penguji1" id="penguji1" autocomplete="off"
+                                        value="<%= data.schedule.penguji1 %>" readonly>
+                            
+                                </div>
+                            </div>
+                            <div class="flex justify-between gap-8">
+                                <h1 class="font-base text-darkBlue w-96">Dosen Penguji Kedua</h1>
+                                <div class="flex flex-col flex-auto">
+                                    <input
+                                        class="border text-sm font-base flex-auto text-darkBlue bg-transparent outline-none h-10 px-4 border-grey"
+                                        required type="text" name="penguji2" id="penguji2" autocomplete="off"
+                                        value="<%= data.schedule.penguji2 %>" readonly>
+                            
+                                </div>
+                            </div>
+                            <div class="flex justify-between gap-8">
+                                <h1 class="font-base text-darkBlue w-96">Dosen Penguji Ketiga</h1>
+                                <div class="flex flex-col flex-auto">
+                                    <input
+                                        class="border text-sm font-base flex-auto text-darkBlue bg-transparent outline-none h-10 px-4 border-grey"
+                                        required type="text" name="penguji3" id="penguji3" autocomplete="off"
+                                        value="<%= data.schedule.penguji3 %>" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end data -->
+                        <!-- end program -->
+                    </div>
+            </div>
+    </div>
+</body>
+
+</html>

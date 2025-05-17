@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/head.ejs") %>
+</head>
+
+<body class="bg-white">
+    <div class="mainContainer flex flex-col">
+        <%- include("../partials/navbar.ejs") %>
+            <div class="flex">
+                <%- include("../partials/sidebar.ejs") %>
+                    <div class="flex flex-col ml-72 p-6 w-full gap-10">
+                        <!-- start program -->
+                        <!-- start title -->
+                        <div class="flex flex-col">
+                            <h1 class="text-3xl text-left titleSidebar font-base text-darkBlue font-semibold">
+                                Hai Admin</h1>
+                            <div class="flex flex-row items-center gap-1">
+                                <p class="text-sm font-medium font-base text-secBlue">[informasi tambahan]</p>
+                            </div>
+                        </div>
+                        <!-- end title -->
+                        <!-- start tabel kit -->
+                        <div class="flex justify-between">
+                            <div class="flex">
+                                <!-- start fitur search -->
+                                <div class="flex">
+                                    <div class="w-10 h-10 flex justify-center items-center bg-darkBlue">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="#f3f3f3" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-search-icon lucide-search">
+                                            <circle cx="11" cy="11" r="8" />
+                                            <path d="m21 21-4.3-4.3" />
+                                        </svg>
+                                    </div>
+                                    <input
+                                        class="border text-sm font-base text-darkBlue bg-transparent outline-none h-10 w-80 px-4 border-grey focus:border-darkBlue"
+                                        type="text" name="searchInput" id="searchInput"
+                                        placeholder="Cari data judul, nama atau NIM" autocomplete="off">
+                                </div>
+                                <!-- end fitur search -->
+                            </div>
+                            <div class="flex gap-4">
+                                <!-- start lihat pengajuan skripsi -->
+                                <a class="flex items-center group" href="/activity/unapproved">
+                                    <div class="flex justify-center items-center bg-darkBlue w-10 h-10">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="#f3f3f3" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-user-plus-icon lucide-user-plus">
+                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                            <circle cx="9" cy="7" r="4" />
+                                            <line x1="19" x2="19" y1="8" y2="14" />
+                                            <line x1="22" x2="16" y1="11" y2="11" />
+                                        </svg>
+                                    </div>
+                                    <h1
+                                        class="font-base text-darkBlue px-4 h-10 flex items-center border border-grey group-hover:bg-darkBlue group-hover:text-white group-hover:border-darkBlue">
+                                        Lihat Pengajuan Skripsi</h1>
+                                </a>
+                                <!-- end lihat pengajuan skripsi -->
+                                <% if (data.time) { %>
+                                <div class="flex items-center group">
+                                    <div class="flex justify-center items-center bg-darkBlue w-10 h-10">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="#f3f3f3" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-timer-icon lucide-timer">
+                                            <line x1="10" x2="14" y1="2" y2="2" />
+                                            <line x1="12" x2="15" y1="14" y2="11" />
+                                            <circle cx="12" cy="14" r="8" />
+                                        </svg>
+                                    </div>
+                                    <h1
+                                        class="font-base text-darkBlue px-4 h-10 flex items-center border border-grey group-hover:bg-darkBlue group-hover:text-white group-hover:border-darkBlue">
+                                        Batas waktu setor judul : <%= data.time %></h1>
+                                </div>
+                                <% } else { %>
+                                <!-- start button atur waktu setor judul -->
+                                <div id="submissionButton" class="flex items-center group cursor-pointer"
+                                    onclick="clickSubmissionButton()">
+                                    <div class="flex justify-center items-center bg-darkBlue w-10 h-10">
+                                        <svg id="addIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                            viewBox="0 0 24 24" fill="none" stroke="#f3f3f3" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-plus-icon lucide-plus">
+                                            <path d="M5 12h14" />
+                                            <path d="M12 5v14" />
+                                        </svg>
+                                        <svg id="addCalendar" class="hidden" xmlns="http://www.w3.org/2000/svg"
+                                            width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#f3f3f3"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                            class="lucide lucide-calendar-icon lucide-calendar">
+                                            <path d="M8 2v4" />
+                                            <path d="M16 2v4" />
+                                            <rect width="18" height="18" x="3" y="4" rx="2" />
+                                            <path d="M3 10h18" />
+                                        </svg>
+                                    </div>
+                                    <h1
+                                        class="submissionText font-base text-darkBlue px-4 h-10 flex items-center border border-grey group-hover:bg-darkBlue group-hover:text-white group-hover:border-darkBlue">
+                                        Atur Waktu Setor Judul</h1>
+
+                                    <div
+                                        class="submissionContent pl-4 h-10 flex items-center border border-grey hidden">
+                                        <h1 class="submissionText font-base text-darkBlue">
+                                            Batas Jadwal :</h1>
+                                        <form id="thesisForm" class="flex" method="post">
+                                            <!-- <input class="font-base font-bold text-darkBlue mx-4 cursor-pointer outline-none" type="time" name="startTime" id="startTime" required> -->
+                                            <input
+                                                class="font-base font-bold text-darkBlue mx-4 cursor-pointer outline-none"
+                                                type="date" name="startTime" id="startTime" required>
+                                            <a class="font-base text-red-400 px-4 h-10 flex items-center border-x border-grey cursor-pointer hover:bg-red-400 hover:text-white"
+                                                href="/activity">Batal</a>
+                                            <button
+                                                class="font-base text-darkBlue px-4 h-10 flex items-center cursor-pointer hover:bg-darkBlue hover:text-white"
+                                                type="submit">Konfirmasi</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- end button atur waktu setor judul -->
+                                <% } %>
+                            </div>
+                        </div>
+                        <!-- end tabel kit -->
+                        <!-- start tabel -->
+                        <% if (data.allThesis.length> 0) { %>
+                            <table class="table-fixed border-collapse border-spacing-4 p-4 border border-gray-400">
+                                <thead>
+                                    <tr class="border">
+                                        <th
+                                            class="text-left font-base text-white bg-darkBlue border border-darkBlue font-normal text-xl p-3 w-8">
+                                            #</th>
+                                        <th
+                                            class="text-left font-base text-white bg-darkBlue border border-darkBlue font-bold text-xl p-3">
+                                            Judul Skripsi</th>
+                                        <th
+                                            class="text-left font-base text-white bg-darkBlue border border-darkBlue font-bold text-xl p-3 ">
+                                            Nama</th>
+                                        <th
+                                            class="text-left font-base text-white bg-darkBlue border border-darkBlue font-bold text-xl p-3">
+                                            NIM</th>
+                                        <th
+                                            class="text-left font-base text-white bg-darkBlue border border-darkBlue font-bold text-xl p-3">
+                                            Status</th>
+                                        <th
+                                            class="text-left font-base text-white bg-darkBlue border border-darkBlue font-bold text-xl p-3 w-40">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dataList">
+                                    <% data.allThesis.forEach((item, index)=> { %>
+                                        <tr>
+                                            <td class="border border-grey py-2 px-3 font-base text-darkBlue">
+                                                <%= index + 1 %>
+                                            </td>
+                                            <td class="border border-grey py-2 px-3 font-base text-darkBlue">
+                                                <%= item.judulUtama %>
+                                            </td>
+                                            <td class="border border-grey py-2 px-3 ">
+                                                <div class="flex items-center gap-4">
+                                                    <img class="object-cover w-8 h-8 rounded-full border border-grey"
+                                                        src="/images/_test.jpg" alt="">
+                                                    <p class="font-base text-darkBlue">
+                                                        <%= item.name %>
+                                                    </p>
+                                                </div>
+                                            </td>
+                                            <td class="border border-grey py-2 px-3 font-base text-darkBlue">
+                                                <%= item.numberID %>
+                                            </td>
+                                            <td class="border border-grey py-2 px-3 font-base text-darkBlue">
+                                                <%= item.status %>
+                                            </td>
+                                            <td class="border border-grey py-2 px-3 font-base text-darkBlue">
+                                                <a class="flex items-center gap-4 cursor-pointer"
+                                                    href="/activity/<%= item.uid %>">
+                                                    <p
+                                                        class="text-darkBlue underline underline-offset-4 decoration-darkBlue">
+                                                        Detail</p>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                        viewBox="0 0 24 24" fill="none" stroke="#262861"
+                                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                        class="lucide lucide-chevron-right-icon lucide-chevron-right">
+                                                        <path d="m9 18 6-6-6-6" />
+                                                    </svg>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                </tbody>
+                            </table>
+                            <% } else { %>
+                                <div class="flex justify-center items-center gap-4 bg-secWhite p-6 h-96">
+                                    <p class="text-sm font-medium font-base text-darkBlue">Tidak ada tugas akhir
+                                        sejauh ini</p>
+                                </div>
+                                <% } %>
+                                    <!-- end tabel -->
+                                    <!-- end program -->
+                    </div>
+            </div>
+    </div>
+    <script src="/js/searchThesis.js"></script>
+    <script src="/js/submissionTime.js"></script>
+</body>
+
+</html>

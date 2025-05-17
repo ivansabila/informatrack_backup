@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head.ejs") %>
+</head>
+
+<body class="bg-white">
+    <div class="mainContainer flex flex-col">
+        <%- include("./partials/navbar.ejs") %>
+            <div class="flex">
+                <%- include("./partials/sidebar.ejs") %>
+                    <div class="flex flex-col ml-72 p-6 w-full gap-10">
+                        <!-- start program -->
+                        <!-- start title -->
+                        <div class="flex flex-col">
+                            <h1 class="text-3xl text-left titleSidebar font-base text-darkBlue font-semibold">
+                                Hai Admin</h1>
+                            <div class="flex flex-row items-center gap-1">
+                                <p class="text-sm font-medium font-base text-secBlue">[informasi tambahan]</p>
+                            </div>
+                        </div>
+                        <!-- end title -->
+                        <!-- start container -->
+                        <div class="flex flex-col w-full gap-8">
+                            <div class="flex gap-8">
+                                <!-- start approved user -->
+                                <a class="approvedUser flex flex-col w-1/2 bg-secWhite p-4 gap-4 hover:bg-secBlue/10 cursor-pointer group"
+                                    href="/users/unapproved">
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="w-12 h-12 flex justify-center items-center bg-white group-hover:bg-darkBlue">
+                                            <svg class="stroke-darkBlue group-hover:stroke-white"
+                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="#262861" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-user-plus-icon lucide-user-plus">
+                                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                                                <circle cx="9" cy="7" r="4" />
+                                                <line x1="19" x2="19" y1="8" y2="14" />
+                                                <line x1="22" x2="16" y1="11" y2="11" />
+                                            </svg>
+                                        </div>
+                                        <h1 class="font-base text-darkBlue text-lg font-bold">Pengajuan Akun
+                                            Pengguna
+                                        </h1>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <h1 class="font-base text-darkBlue text-6xl font-bold">
+                                            <%= data.dashboard.countUnapprovedUsers %>
+                                        </h1>
+                                        <div class="flex flex-col">
+                                            <h1 class="font-base text-secBlue text-md">+<%= data.dashboard.countAllUsers
+                                                    %>
+                                            </h1>
+                                            <h1 class="font-base text-secBlue text-md -mt-1">Pengguna</h1>
+                                        </div>
+                                    </div>
+                                </a>
+                                <!-- end approved user -->
+                                <!-- start approved judul -->
+                                <a class="approvedThesis flex flex-col w-1/2 bg-secWhite p-4 gap-4 hover:bg-secBlue/10 cursor-pointer group"
+                                    href="/activity/unapproved">
+                                    <div class=" flex items-center gap-4">
+                                        <div
+                                            class="w-12 h-12 flex justify-center items-center bg-white group-hover:bg-darkBlue">
+                                            <svg class="stroke-darkBlue group-hover:stroke-white"
+                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="#262861" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-book-open-check-icon lucide-book-open-check">
+                                                <path d="M12 21V7" />
+                                                <path d="m16 12 2 2 4-4" />
+                                                <path
+                                                    d="M22 6V4a1 1 0 0 0-1-1h-5a4 4 0 0 0-4 4 4 4 0 0 0-4-4H3a1 1 0 0 0-1 1v13a1 1 0 0 0 1 1h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6a1 1 0 0 0 1-1v-1.3" />
+                                            </svg>
+                                        </div>
+                                        <h1 class="font-base text-darkBlue text-lg font-bold">Pengajuan Tugas Akhir
+                                        </h1>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <h1 class="font-base text-darkBlue text-6xl font-bold">
+                                            <%= data.dashboard.countThesisSubmission %>
+                                        </h1>
+                                        <div class="flex flex-col">
+                                            <h1 class="font-base text-secBlue text-md">+<%=
+                                                    data.dashboard.countAllThesis %>
+                                            </h1>
+                                            <h1 class="font-base text-secBlue text-md -mt-1">Tugas Akhir</h1>
+                                        </div>
+                                    </div>
+                                </a>
+                                <!-- end approved judul -->
+                                <!-- start pengajuan ujian -->
+                                <a
+                                    class="approvedSchedule flex flex-col w-1/2 bg-secWhite p-4 gap-4  hover:bg-secBlue/10 cursor-pointer group" href="/schedule">
+                                    <div class="flex items-center gap-4">
+                                        <div
+                                            class="w-12 h-12 flex justify-center items-center bg-white group-hover:bg-darkBlue">
+                                            <svg class="stroke-darkBlue group-hover:stroke-white"
+                                                xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                viewBox="0 0 24 24" fill="none" stroke="#262861" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-laptop-minimal-icon lucide-laptop-minimal">
+                                                <rect width="18" height="12" x="3" y="4" rx="2" ry="2" />
+                                                <line x1="2" x2="22" y1="20" y2="20" />
+                                            </svg>
+                                        </div>
+                                        <h1 class="font-base text-darkBlue text-lg font-bold">Pendaftar Ujian
+                                        </h1>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <h1 class="font-base text-darkBlue text-6xl font-bold">
+                                            <%= data.dashboard.countSchedule %>
+                                        </h1>
+                                        <div class="flex flex-col">
+                                            <h1 class="font-base text-secBlue text-md">+<%=
+                                                    data.dashboard.countAllStudent %>
+                                            </h1>
+                                            <h1 class="font-base text-secBlue text-md -mt-1">Mahasiswa</h1>
+                                        </div>
+                                    </div>
+                                </a>
+                                <!-- end pengajuan ujian -->
+                            </div>
+                            <!-- start status progres mahasiswa -->
+                            <a class="statusProgress flex flex-row w-full bg-secWhite" href="/schedule">
+                                <div class="w-1/2 flex flex-col border-r border-grey">
+                                    <!-- start ujian proposal -->
+                                    <div class="flex flex-col gap-4 p-4 ">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-12 h-12 flex justify-center items-center bg-white">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="#262861" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                    class="lucide lucide-file-check-icon lucide-file-check">
+                                                    <path
+                                                        d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                                                    <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                                                    <path d="m9 15 2 2 4-4" />
+                                                </svg>
+                                            </div>
+                                            <h1 class="font-base text-darkBlue text-lg font-bold">Ujian proposal
+                                            </h1>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <h1 class="font-base text-darkBlue text-6xl font-bold">
+                                                <%= data.dashboard.countProposal %>
+                                            </h1>
+                                            <div class="flex flex-col">
+                                                <h1 class="font-base text-secBlue text-md">Ujian Proposal</h1>
+                                                <h1 class="font-base text-secBlue text-md -mt-1">dalam satu bulan
+                                                    terakhir</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end ujian proposal -->
+                                    <!-- start grafik -->
+                                    <div class="flex flex-col gap-2 h-full">
+                                        <div class="flex justify-around items-center">
+                                            <div class="flex items-center gap-2">
+                                                <div class="h-6 w-8 bg-darkBlue"></div>
+                                                <h1 class="font-base text-secBlue text-md -mt-1">Proposal • <%=
+                                                        data.dashboard.percentageProposal %>%</h1>
+                                            </div>
+                                            <div class="flex items-center gap-2">
+                                                <div class="h-6 w-8 bg-blue-800"></div>
+                                                <h1 class="font-base text-secBlue text-md -mt-1">Hasil • <%=
+                                                        data.dashboard.percentageHasil %>%</h1>
+                                            </div>
+                                            <div class="flex items-center gap-2">
+                                                <div class="h-6 w-8 bg-blue-500"></div>
+                                                <h1 class="font-base text-secBlue text-md -mt-1">Tutup • <%=
+                                                        data.dashboard.percentageTutup %>%</h1>
+                                            </div>
+                                        </div>
+                                        <div class="flex h-full">
+                                            <div id="divProposal"
+                                                class="h-full bg-darkBlue bg-[url(/images/pattern.png)] flex items-center justify-center font-base text-white text-sm">
+                                            </div>
+                                            <div id="divHasil"
+                                                class="h-full bg-blue-800 bg-[url(/images/pattern.png)] flex items-center justify-center font-base text-white text-sm">
+                                            </div>
+                                            <div id="divTutup"
+                                                class="h-full bg-blue-500 bg-[url(/images/pattern.png)] flex items-center justify-center font-base text-white text-sm">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end grafik -->
+                                </div>
+                                <div class="w-1/2 flex flex-col items-center">
+                                    <!-- start ujian hasil -->
+                                    <div class="w-full flex flex-col gap-4 p-4 border-b border-grey">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-12 h-12 flex justify-center items-center bg-white">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="#262861" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                    class="lucide lucide-check-icon lucide-check">
+                                                    <path d="M20 6 9 17l-5-5" />
+                                                </svg>
+                                            </div>
+                                            <h1 class="font-base text-darkBlue text-lg font-bold">Ujian Hasil
+                                            </h1>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <h1 class="font-base text-darkBlue text-6xl font-bold">
+                                                <%= data.dashboard.countHasil %>
+                                            </h1>
+                                            <div class="flex flex-col">
+                                                <h1 class="font-base text-secBlue text-md">Ujian Hasil</h1>
+                                                <h1 class="font-base text-secBlue text-md -mt-1">dalam satu bulan
+                                                    terakhir</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end ujian hasil -->
+                                    <!-- start ujian tutup -->
+                                    <div class="w-full flex flex-col gap-4 p-4">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-12 h-12 flex justify-center items-center bg-white">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="#262861" stroke-width="2"
+                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                    class="lucide lucide-check-check-icon lucide-check-check">
+                                                    <path d="M18 6 7 17l-5-5" />
+                                                    <path d="m22 10-7.5 7.5L13 16" />
+                                                </svg>
+                                            </div>
+                                            <h1 class="font-base text-darkBlue text-lg font-bold">Ujian Tutup
+                                            </h1>
+                                        </div>
+                                        <div class="flex items-center gap-2">
+                                            <h1 class="font-base text-darkBlue text-6xl font-bold">
+                                                <%= data.dashboard.countTutup %>
+                                            </h1>
+                                            <div class="flex flex-col">
+                                                <h1 class="font-base text-secBlue text-md">Ujian Tutup</h1>
+                                                <h1 class="font-base text-secBlue text-md -mt-1">dalam satu bulan
+                                                    terakhir</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end ujian tutup -->
+                                </div>
+                            </a>
+                            <!-- end status progres mahasiswa -->
+                        </div>
+                        <!-- end program -->
+                    </div>
+            </div>
+    </div>
+    <script>
+        const divProposal = document.querySelector("#divProposal")
+        const divHasil = document.querySelector("#divHasil")
+        const divTutup = document.querySelector("#divTutup")
+
+        divProposal.style.width = <%= data.dashboard.percentageProposal %> + "%"
+        divHasil.style.width = <%= data.dashboard.percentageHasil %> + "%"
+        divTutup.style.width = <%= data.dashboard.percentageTutup %> + "%"
+    </script>
+</body>
+
+</html>

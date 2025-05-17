@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/head.ejs") %>
+</head>
+
+<body class="bg-white">
+    <div class="mainContainer flex flex-col">
+        <%- include("../partials/navbar.ejs") %>
+            <div class="flex">
+                <%- include("../partials/sidebar.ejs") %>
+                    <div class="flex flex-col ml-72 p-6 w-full gap-10">
+                        <!-- start program -->
+                        <!-- start title -->
+                        <div class="flex flex-col">
+                            <h1 class="text-3xl text-left titleSidebar font-base text-darkBlue font-semibold">
+                                Hai Admin</h1>
+                            <div class="flex flex-row items-center gap-1">
+                                <p class="text-sm font-medium font-base text-secBlue">[informasi tambahan]</p>
+                            </div>
+                        </div>
+                        <form action="/activity/<%= data.thesis.uid %>" method="post">
+                            <button class="border cursor-pointer" type="submit">Notification</button>
+                        </form>
+                        <!-- end title -->
+                        <!-- start data -->
+                        <p class="border text-sm font-base w-fit text-white px-4 py-2 leading-6 <%= data.thesis.isApproved ? "bg-darkBlue" : "bg-red-400" %>">
+                            <%= data.thesis.isApproved ? "Judul Diterima" : "Judul Ditolak" %>
+                        </p>
+                        <div class="flex flex-col gap-8">
+                            <div class="flex justify-between gap-8">
+                                <h1 class="font-base text-darkBlue w-96 shrink-0">Nama Lengkap</h1>
+                                <p
+                                    class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                    <%= data.thesis.name %>
+                                </p>
+                            </div>
+                            <div class="flex justify-between gap-8">
+                                <h1 class="font-base text-darkBlue w-96 shrink-0">Nomor Induk Mahasiswa (NIM)</h1>
+                                <p
+                                    class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                    <%= data.thesis.numberID %>
+                                </p>
+                            </div>
+                            <div class="flex justify-between gap-8">
+                                <h1 class="font-base text-darkBlue w-96 shrink-0">Status</h1>
+                                <p
+                                    class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                    <%= data.thesis.status %>
+                                </p>
+                            </div>
+                            <% if (data.thesis.isApproved) { %>
+                                <div class="flex justify-between gap-8">
+                                    <h1 class="font-base text-darkBlue w-96 shrink-0">Judul Tugas Akhir</h1>
+                                    <p
+                                        class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                        <%= data.thesis.judul %>
+                                    </p>
+                                </div>
+                                <div class="flex justify-between gap-8">
+                                    <h1 class="font-base text-darkBlue w-96">Tujuan Judul Tugas Akhir</h1>
+                                    <p
+                                        class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                        <%= data.thesis.tujuan %>
+                                    </p>
+                                </div>
+                                <% } else { %>
+                                    <div class="flex justify-between gap-8">
+                                        <h1 class="font-base text-darkBlue w-96 shrink-0">Judul Utama</h1>
+                                        <p
+                                            class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                            <%= data.thesis.judulUtama %>
+                                        </p>
+                                    </div>
+                                    <div class="flex justify-between gap-8">
+                                        <h1 class="font-base text-darkBlue w-96">Tujuan Judul Utama</h1>
+                                        <p
+                                            class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                            <%= data.thesis.tujuanUtama %>
+                                        </p>
+                                    </div>
+                                    <div class="flex justify-between gap-8">
+                                        <h1 class="font-base text-darkBlue w-96 shrink-0">Judul Cadangan Pertama</h1>
+                                        <p
+                                            class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                            <%= data.thesis.judulCadangan1 %>
+                                        </p>
+                                    </div>
+                                    <div class="flex justify-between gap-8">
+                                        <h1 class="font-base text-darkBlue w-96">Tujuan Judul Cadangan Pertama</h1>
+                                        <p
+                                            class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                            <%= data.thesis.tujuanCadangan1 %>
+                                        </p>
+                                    </div>
+                                    <div class="flex justify-between gap-8">
+                                        <h1 class="font-base text-darkBlue w-96 shrink-0">Judul Cadangan Kedua</h1>
+                                        <p
+                                            class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                            <%= data.thesis.judulCadangan2 %>
+                                        </p>
+                                    </div>
+                                    <div class="flex justify-between gap-8">
+                                        <h1 class="font-base text-darkBlue w-96">Tujuan Judul Cadangan Kedua</h1>
+                                        <p
+                                            class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
+                                            <%= data.thesis.tujuanCadangan2 %>
+                                        </p>
+                                    </div>
+                                    <% } %>
+                        </div>
+                        <!-- end data -->
+
+                        <!-- end program -->
+                    </div>
+            </div>
+    </div>
+    <script src="/js/chooseThesis.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+@theme {
+    --font-base: "Space Grotesk";
+
+    /* base color */
+    /* backgroud */
+    --color-white: #f3f3f3;
+    /* primary */
+    --color-blue: #333683;
+    /* secondary */
+    --color-secWhite: #ececee;
+
+    /* font color */
+    /* primary */
+    --color-darkBlue: #262861;
+    /* secondary */
+    --color-secBlue: #999999;
+    /* tertiary */
+    --color-black: #333333;
+
+    /* stroke color */
+    --color-grey: #cccccc;
+}

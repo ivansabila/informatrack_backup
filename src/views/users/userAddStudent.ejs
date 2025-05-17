@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/head.ejs") %>
+</head>
+
+<body class="bg-white">
+    <div class="mainContainer flex flex-col">
+        <%- include("../partials/navbar.ejs") %>
+            <div class="flex">
+                <%- include("../partials/sidebar.ejs") %>
+                    <div class="flex flex-col ml-72 p-6 w-full gap-10">
+                        <!-- start program -->
+                        <!-- start title -->
+                        <div class="flex flex-col">
+                            <h1 class="text-3xl text-left titleSidebar font-base text-darkBlue font-semibold">
+                                Hai Admin</h1>
+                            <div class="flex flex-row items-center gap-1">
+                                <p class="text-sm font-medium font-base text-secBlue">[informasi tambahan]</p>
+                            </div>
+                        </div>
+                        <!-- end title -->
+                        <!-- start input's -->
+                        <form action="/users/student/add" method="post">
+                            <div class="flex flex-col gap-6">
+                                <div class="flex flex-col gap-8">
+                                    <div class="flex justify-between gap-8">
+                                        <h1 class="font-base text-darkBlue w-96">Nama Lengkap</h1>
+                                        <div class="flex flex-col flex-auto">
+                                            <input
+                                                class="border text-sm font-base flex-auto text-darkBlue bg-transparent outline-none h-10 px-4 border-grey focus:border-darkBlue"
+                                                required type="text" name="name" id="name"
+                                                placeholder="Masukkan Nama Lengkap" autocomplete="off" autofocus
+                                                value="<%= data.oldData.name %>">
+                                            <p class="errorMessage text-sm font-medium font-base text-red-400">
+                                                <%= data.error.name %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between gap-8">
+                                        <h1 class="font-base text-darkBlue w-96">Nomor Induk Mahasiswa (NIM)</h1>
+                                        <div class="flex flex-col flex-auto">
+                                            <input
+                                                class="border text-sm font-base flex-auto text-darkBlue bg-transparent outline-none h-10 px-4 border-grey focus:border-darkBlue"
+                                                required type="text" name="numberID" id="numberID"
+                                                placeholder="Masukkan Nomor Induk Mahasiswa (NIM)" autocomplete="off"
+                                                autofocus value="<%= data.oldData.numberID %>" oninput="inputPassword()">
+                                            <p class="errorMessage text-sm font-medium font-base text-red-400">
+                                                <%= data.error.nim %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between gap-8">
+                                        <h1 class="font-base text-darkBlue w-96">Email</h1>
+                                        <div class="flex flex-col flex-auto">
+                                            <input
+                                                class="border text-sm font-base flex-auto text-darkBlue bg-transparent outline-none h-10 px-4 border-grey focus:border-darkBlue"
+                                                required type="email" name="email" id="email"
+                                                placeholder="pengguna@google.com" autocomplete="off" autofocus
+                                                value="<%= data.oldData.email %>">
+                                            <p class="errorMessage text-sm font-medium font-base text-red-400">
+                                                <%= data.error.email %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between items-start gap-8">
+                                        <div class="flex flex-col">
+                                            <h1 class="font-base text-darkBlue w-96">Password</h1>
+                                            <h1 class="font-base text-secBlue text-sm w-96">Password otomatis diambil dari Nomor Induk Mahasiswa yang diinputkan </h1>
+                                        </div>
+                                        <div class="flex flex-col flex-auto">
+                                            <input
+                                                class="border text-sm font-base flex-auto text-darkBlue bg-transparent outline-none h-10 px-4 border-grey"
+                                                required type="password" name="password" id="password" readonly
+                                                placeholder="Password auto-generate" autocomplete="off" autofocus
+                                                value="<%= data.oldData.password %>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="div flex gap-4 justify-end">
+                                    <a class="flex items-center group cursor-pointer" href="/users">
+                                        <h1
+                                            class="font-base text-red-400 px-4 h-10 flex items-center border border-red-400 group-hover:bg-red-400 group-hover:text-white ">
+                                            Batal</h1>
+                                    </a>
+                                    <button class="flex items-center group cursor-pointer" href="#" type="submit">
+                                        <div class="flex justify-center items-center bg-darkBlue w-10 h-10">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="none" stroke="#f3f3f3"" stroke-width=" 2"
+                                                stroke-linecap="round" stroke-linejoin="round"
+                                                class="lucide lucide-plus-icon lucide-plus">
+                                                <path d="M5 12h14" />
+                                                <path d="M12 5v14" />
+                                            </svg>
+                                        </div>
+                                        <h1
+                                            class="font-base text-darkBlue px-4 h-10 flex items-center border border-grey group-hover:bg-darkBlue group-hover:text-white group-hover:border-darkBlue">
+                                            Tambah Mahasiswa</h1>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- end input's -->
+                        <!-- end program -->
+                    </div>
+            </div>
+    </div>
+    <script src="/js/inputPassword.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("../partials/head.ejs") %>
+</head>
+
+<body class="bg-white">
+    <div class="mainContainer flex flex-col">
+        <%- include("../partials/navbar.ejs") %>
+            <div class="flex">
+                <%- include("../partials/sidebar.ejs") %>
+                    <div class="flex flex-col ml-72 p-6 w-full gap-10">
+                        <!-- start program -->
+                        <!-- start title -->
+                        <div class="flex flex-col">
+                            <h1 class="text-3xl text-left titleSidebar font-base text-darkBlue font-semibold">
+                                Hai Admin</h1>
+                            <div class="flex flex-row items-center gap-1">
+                                <p class="text-sm font-medium font-base text-secBlue">[informasi tambahan]</p>
+                            </div>
+                        </div>
+                        <!-- end title -->
+                        <!-- start tabel kit -->
+                        <div class="flex justify-between">
+                            <!-- start fitur search -->
+                            <div class="flex">
+                                <div class="w-10 h-10 flex justify-center items-center bg-darkBlue">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="#f3f3f3" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="lucide lucide-search-icon lucide-search">
+                                        <circle cx="11" cy="11" r="8" />
+                                        <path d="m21 21-4.3-4.3" />
+                                    </svg>
+                                </div>
+                                <input
+                                    class="border text-sm font-base text-darkBlue bg-transparent outline-none h-10 w-80 px-4 border-grey focus:border-darkBlue"
+                                    type="text" name="searchInput" id="searchInput" placeholder="Cari data nama"
+                                    autocomplete="off">
+                            </div>
+                            <!-- end fitur search -->
+                        </div>
+                        <!-- end tabel kit -->
+                        <!-- start tabel -->
+                        <% if (data.userUnapproved.length> 0) { %>
+                            <table class="table-fixed border-collapse border-spacing-4 p-4 border border-gray-400">
+                                <thead>
+                                    <tr class="border">
+                                        <th
+                                            class="text-left font-base text-white bg-darkBlue border border-darkBlue font-normal text-xl p-3 w-8">
+                                            #</th>
+                                        <th
+                                            class="text-left font-base text-white bg-darkBlue border border-darkBlue font-bold text-xl p-3">
+                                            Nama</th>
+                                        <th
+                                            class="text-left font-base text-white bg-darkBlue border border-darkBlue font-bold text-xl p-3">
+                                            NIM</th>
+                                        <th
+                                            class="text-left font-base text-white bg-darkBlue border border-darkBlue font-bold text-xl p-3">
+                                            Email</th>
+                                        <th
+                                            class="text-left font-base text-white bg-darkBlue border border-darkBlue font-bold text-xl p-3">
+                                            Peran</th>
+                                        <th
+                                            class="text-left font-base text-white bg-darkBlue border border-darkBlue font-bold text-xl p-3">
+                                            Timestamp</th>
+                                        <th
+                                            class="text-left font-base text-white bg-darkBlue border border-darkBlue font-bold text-xl p-3 w-40">
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dataList">
+                                    <% data.userUnapproved.forEach((item, index)=> { %>
+                                        <tr>
+                                            <td class="border border-grey py-2 px-3 font-base text-darkBlue">
+                                                <%= index + 1 %>
+                                            </td>
+                                            <td class="border border-grey py-2 px-3 font-base text-darkBlue">
+                                                <%= item.name %>
+                                            </td>
+                                            <td class="border border-grey py-2 px-3 font-base text-darkBlue">
+                                                <%= item.numberID %>
+                                            </td>
+                                            <td class="border border-grey py-2 px-3 font-base text-darkBlue">
+                                                <%= item.email %>
+
+                                            </td>
+                                            <td class="border border-grey py-2 px-3 font-base text-darkBlue">
+                                                <%= item.role %>
+                                            </td>
+                                            <td class="border border-grey py-2 px-3 font-base text-darkBlue">
+                                                <%= item.registerDate %>
+                                            </td>
+                                            <td class="border border-grey font-base text-darkBlue">
+                                                <div class="flex p-1">
+                                                    <button
+                                                        class="flex items-center gap-2 cursor-pointer p-2 h-9 group hover:bg-red-400"
+                                                        type="button" onclick="rejectUser(`<%= item.uid %>`)">
+                                                        <svg class="stroke-red-400 group-hover:stroke-white"
+                                                            xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="lucide lucide-ban-icon lucide-ban">
+                                                            <circle cx="12" cy="12" r="10" />
+                                                            <path d="m4.9 4.9 14.2 14.2" />
+                                                        </svg>
+                                                        <p class="font-base text-red-400 group-hover:text-white">
+                                                            Tolak</p>
+                                                    </button>
+                                                    <button
+                                                        class="flex items-center gap-2 cursor-pointer p-2 h-9 group border-l border-grey hover:bg-darkBlue"
+                                                        type="button" onclick="acceptUser(`<%= item.uid %>`)">
+                                                        <svg class="stroke-darkBlue group-hover:stroke-white"
+                                                            xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                            stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"
+                                                            class="lucide lucide-check-icon lucide-check">
+                                                            <path d="M20 6 9 17l-5-5" />
+                                                        </svg>
+                                                        <p class="font-base text-darkBlue group-hover:text-white">
+                                                            Terima</p>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                </tbody>
+                            </table>
+                            <% } else { %>
+                                <div class="flex justify-center items-center gap-4 bg-secWhite p-6 h-96">
+                                    <p class="text-sm font-medium font-base text-darkBlue">Tidak ada pengajuan akun
+                                        sejauh ini</p>
+                                </div>
+                                <% } %>
+                                    <!-- end tabel -->
+                                    <!-- end program -->
+                    </div>
+            </div>
+    </div>
+    <script src="/js/userIsApproved.js"></script>
+    <script src="/js/searchUserUnapproved.js"></script>
+</body>
+
+</html>

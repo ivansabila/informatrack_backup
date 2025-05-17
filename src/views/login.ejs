@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head.ejs") %>
+</head>
+
+<body class="bg-white">
+    <div class="mainContainer w-screen h-screen bg-slate-100 flex flex-row justify-between">
+        <div class="mainContain w-1/2 flex flex-col justify-center items-center">
+            <div class="flex flex-col justify-center items-center gap-8 w-1/2">
+                <img class="w-12 h-12" src="/images/_logo.png" alt="">
+                <div class="heroTitle flex flex-col justify-center items-center">
+                    <h1 class="text-3xl text-left titleSidebar font-base text-darkBlue font-bold">
+                        Login Informatrack</h1>
+                    <h1 class="text-sm font-medium font-base text-secBlue">Silahkan
+                        masukan akun anda terlebih dahulu.</h1>
+                </div>
+                <form id="formLogin" class="flex flex-col gap-4" action="#" method="post">
+                    <div class="flex flex-col justify-between gap-1">
+                        <h1 class="font-base text-sm text-darkBlue w-96">Email</h1>
+                        <div class="flex flex-col flex-auto">
+                            <input
+                                class="border text-sm font-base flex-auto text-darkBlue bg-transparent outline-none h-10 px-4 border-grey focus:border-darkBlue"
+                                required type="text" name="email" id="email" placeholder="Masukkan Email"
+                                autocomplete="off" autofocus value="">
+                            <p id="errorEmail" class="errorMessage text-sm font-medium font-base text-red-400"></p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col justify-between gap-1">
+                        <h1 class="font-base text-sm text-darkBlue w-96">Password</h1>
+                        <div class="flex flex-col flex-auto">
+                            <input
+                                class="border text-sm font-base flex-auto text-darkBlue bg-transparent outline-none h-10 px-4 border-grey focus:border-darkBlue"
+                                required type="password" name="password" id="password" placeholder="Masukkan Password"
+                                autocomplete="off" autofocus value="">
+                            <p id="errorPassword" class="errorMessage text-sm font-medium font-base text-red-400"></p>
+                        </div>
+                    </div>
+                    <button class="flex items-center group cursor-pointer w-full" href="#" type="submit">
+                        <div class="flex justify-center items-center bg-darkBlue w-10 h-10">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                fill="none" stroke="#f3f3f3"" stroke-width=" 2" stroke-linecap="round"
+                                stroke-linejoin="round" class="lucide lucide-plus-icon lucide-plus">
+                                <path d="M5 12h14" />
+                                <path d="M12 5v14" />
+                            </svg>
+                        </div>
+                        <h1
+                            class="font-base text-darkBlue w-full px-4 h-10 flex items-center justify-center border border-grey group-hover:bg-darkBlue group-hover:text-white group-hover:border-darkBlue">
+                            Login</h1>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="extrasContain w-1/2 bg-cover flex flex-col gap-6 items-center justify-center border-l border-slate-200"
+            style="background-image: url(/images/login.png)">
+        </div>
+    </div>
+    <script src="/js/getToken.js" type="module"></script>
+</body>
+
+</html>
