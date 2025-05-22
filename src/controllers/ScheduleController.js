@@ -11,7 +11,6 @@ import { bucket } from "../config/firebase.js";
 class ScheduleController {
     static async index(req, res) {
         const schedules = await Schedule.index();
-        console.log("🚀 ~ ScheduleController ~ index ~ schedules:", schedules);
 
         if (!schedules) {
             const data = {
@@ -164,7 +163,7 @@ class ScheduleController {
 
         const nomorSurat = `${numberLetter}/Q19/TI-UND/${monthNow}/${yearNow}`;
         const hariUjian = `${dayName}, ${hari} ${monthName} ${yearNow}`;
-        const tanggalKeluar = `Baubau, ${dayNow} ${monthNow} ${yearNow}`;
+        const tanggalKeluar = `Baubau, ${dayNow} ${monthName} ${yearNow}`;
 
         const doc = new PDFDocument({ size: "A4", margin: 50 });
         let pdfChunks = [];
@@ -283,7 +282,7 @@ class ScheduleController {
             .text("Pukul", {
                 continued: true,
             })
-            .text(`: ${date} Wita s/d Selesai`, 138)
+            .text(`: ${time} Wita s/d Selesai`, 138)
             .moveDown(0)
             .text("Bertempat di", {
                 continued: true,
@@ -355,7 +354,7 @@ class ScheduleController {
         });
 
         // Upload ke Firebase Storage
-        const pdfName = `${Date.now()}-${thesis.userId}-${jenisUjian.toLowerCase()}.pdf`;
+        const pdfName = `${thesis.userId}-${jenisUjian.toLowerCase()}.pdf`;
         const file = bucket.file(`surat_undangan/${pdfName}`);
 
         await file.save(pdfBuffer, {
@@ -369,6 +368,7 @@ class ScheduleController {
             action: "read",
             expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         });
+        console.log("🚀 ~ ScheduleController ~ store ~ url:", url)
 
         const targetDate = new Date(objData.date);
 
@@ -406,7 +406,6 @@ class ScheduleController {
         }
 
         await Schedule.store(objData);
-        console.log("🚀 ~ ScheduleController ~ store ~ objData:", objData);
 
         return res.redirect("/schedule");
     }
