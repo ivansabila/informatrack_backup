@@ -266,7 +266,7 @@ class ScheduleController {
             .font("Helvetica")
             .text("Dengan hormat,")
             .moveDown(0.5)
-            .text(`Kami mengundang Bapak/Ibu, Saudara (i) untuk menghadiri Seminar Proposal bagi saudara (i) ${name.toUpperCase()} No. Stambuk ${numberID} Program Studi Teknik Informatika, yang akan dilaksanakan pada :`, {
+            .text(`Kami mengundang Bapak/Ibu, Saudara (i) untuk menghadiri Seminar ${capitalize(jenisUjian)} bagi saudara (i) ${name.toUpperCase()} No. Stambuk ${numberID} Program Studi Teknik Informatika, yang akan dilaksanakan pada :`, {
                 lineGap: 2,
                 align: "justify",
             })
@@ -368,7 +368,7 @@ class ScheduleController {
             action: "read",
             expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         });
-        console.log("🚀 ~ ScheduleController ~ store ~ url:", url)
+        console.log("🚀 ~ ScheduleController ~ store ~ url:", url);
 
         const targetDate = new Date(objData.date);
 

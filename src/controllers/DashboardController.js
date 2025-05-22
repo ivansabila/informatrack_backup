@@ -11,49 +11,67 @@ class DashboardController {
         const thesis = await Thesis.index();
         const schedule = await Schedule.index();
 
-        const countUnapprovedUsers = Object.entries(users).filter(([uid, user]) => {
-            return user.isApproved == false;
-        }).length;
-
-        const countAllUsers = Object.entries(users).filter(([uid, user]) => {
-            return user.isApproved == true;
-        }).length;
-
-        const countThesisSubmission = Object.entries(thesis).filter(([uid, thesis]) => {
-            return thesis.isApproved == false;
-        }).length;
-
-        const countAllThesis = Object.entries(thesis).filter(([uid, thesis]) => {
-            return thesis.status !== "under review";
-        }).length;
-
-        const countSchedule = Object.entries(schedule).length;
-
-        const countAllStudent = Object.entries(thesis).filter(([uid, thesis]) => {
-            return thesis.status !== "under review" && thesis.isApproved === true;
-        }).length;
-
         const oneMonthAgo = dayjs().subtract(1, "month");
 
-        const countProposal = Object.entries(schedule).filter(([uid, schedule]) => {
-            const scheduleDate = dayjs(schedule.date);
-            return scheduleDate.isAfter(oneMonthAgo) && schedule.jenisUjian === "proposal";
-        }).length;
-        
-        const countHasil = Object.entries(schedule).filter(([uid, schedule]) => {
-            const scheduleDate = dayjs(schedule.date);
-            return scheduleDate.isAfter(oneMonthAgo) && schedule.jenisUjian === "hasil";
-        }).length;
+        let countUnapprovedUsers = 0;
+        let countAllUsers = 0;
+        let countThesisSubmission = 0;
+        let countAllThesis = 0;
+        let countSchedule = 0;
+        let countAllStudent = 0;
+        let countProposal = 0;
+        let countHasil = 0;
+        let countTutup = 0;
+        let percentageProposal = 0;
+        let percentageHasil = 0;
+        let percentageTutup = 0;
 
-        const countTutup = Object.entries(schedule).filter(([uid, schedule]) => {
-            const scheduleDate = dayjs(schedule.date);
-            return scheduleDate.isAfter(oneMonthAgo) && schedule.jenisUjian === "tutup";
-        }).length;
-        
-        const percentageProposal = Math.floor((countProposal / countSchedule) * 100);
-        const percentageHasil = Math.floor((countHasil / countSchedule) * 100);
-        const percentageTutup = Math.floor((countTutup / countSchedule) * 100);
+        if (users) {
+            countUnapprovedUsers = Object.entries(users).filter(([uid, user]) => {
+                return user.isApproved == false;
+            }).length;
 
+            countAllUsers = Object.entries(users).filter(([uid, user]) => {
+                return user.isApproved == true;
+            }).length;
+        }
+
+        if (thesis) {
+            countThesisSubmission = Object.entries(thesis).filter(([uid, thesis]) => {
+                return thesis.isApproved == false;
+            }).length;
+
+            countAllThesis = Object.entries(thesis).filter(([uid, thesis]) => {
+                return thesis.status !== "under review";
+            }).length;
+
+            countAllStudent = Object.entries(thesis).filter(([uid, thesis]) => {
+                return thesis.status !== "under review" && thesis.isApproved === true;
+            }).length;
+        }
+
+        if (schedule) {
+            countSchedule = Object.entries(schedule).length;
+
+            countProposal = Object.entries(schedule).filter(([uid, schedule]) => {
+                const scheduleDate = dayjs(schedule.date);
+                return scheduleDate.isAfter(oneMonthAgo) && schedule.jenisUjian === "proposal";
+            }).length;
+
+            countHasil = Object.entries(schedule).filter(([uid, schedule]) => {
+                const scheduleDate = dayjs(schedule.date);
+                return scheduleDate.isAfter(oneMonthAgo) && schedule.jenisUjian === "hasil";
+            }).length;
+
+            countTutup = Object.entries(schedule).filter(([uid, schedule]) => {
+                const scheduleDate = dayjs(schedule.date);
+                return scheduleDate.isAfter(oneMonthAgo) && schedule.jenisUjian === "tutup";
+            }).length;
+
+            percentageProposal = Math.floor((countProposal / countSchedule) * 100);
+            percentageHasil = Math.floor((countHasil / countSchedule) * 100);
+            percentageTutup = Math.floor((countTutup / countSchedule) * 100);
+        }
 
         const data = {
             dashboard: {
