@@ -4,9 +4,14 @@ import Schedule from "../models/Schedule.js";
 import capitalize from "../utils/capitalize.js";
 import formatDateTime from "../utils/formatDateTime.js";
 
+import PDFDocument from "pdfkit";
+
+import { bucket } from "../config/firebase.js";
+
 class ScheduleController {
     static async index(req, res) {
         const schedules = await Schedule.index();
+        console.log("🚀 ~ ScheduleController ~ index ~ schedules:", schedules);
 
         if (!schedules) {
             const data = {
@@ -132,8 +137,238 @@ class ScheduleController {
     static async store(req, res) {
         const thesisID = req.params.uid;
 
+        const thesis = await Thesis.get(thesisID);
+
+        const numLetter = await Schedule.getNumberLetter();
+        const numberLetter = String(numLetter).padStart(3, "0");
+
         const { date, time, jenisUjian, name, numberID, judulUtama, tujuanUtama, pembimbing1, pembimbing2, penguji1, penguji2, penguji3 } = req.body;
-        const objData = { thesisID, date, jenisUjian, name, numberID, judulUtama, tujuanUtama, pembimbing1, pembimbing2, penguji1, penguji2, penguji3 };
+        const objData = { thesisID, numberLetter, date, jenisUjian, name, numberID, judulUtama, tujuanUtama, pembimbing1, pembimbing2, penguji1, penguji2, penguji3 };
+
+        console.log("🚀 ~ ScheduleController ~ store ~ objData:", objData);
+
+        // Modified data for letter
+        const monthCode = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"];
+        const days = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"];
+        const months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+
+        const dateNow = new Date();
+        const dayNow = dateNow.getDate();
+        const monthNow = monthCode[dateNow.getMonth()];
+        const yearNow = dateNow.getFullYear();
+
+        const dateTest = new Date(date);
+        const dayName = days[dateTest.getDay()];
+        const hari = dateTest.getDate();
+        const monthName = months[dateTest.getMonth()];
+
+        const nomorSurat = `${numberLetter}/Q19/TI-UND/${monthNow}/${yearNow}`;
+        const hariUjian = `${dayName}, ${hari} ${monthName} ${yearNow}`;
+        const tanggalKeluar = `Baubau, ${dayNow} ${monthNow} ${yearNow}`;
+
+        const doc = new PDFDocument({ size: "A4", margin: 50 });
+        let pdfChunks = [];
+
+        // Kumpulkan data PDF sebagai buffer
+        doc.on("data", (chunk) => pdfChunks.push(chunk));
+
+        // Fungsi untuk format teks dinamis multi-baris
+        const createFormattedText = (doc, label, value, labelWidth = 104, marginLeft = 20) => {
+            const initialX = doc.x;
+            const initialY = doc.y;
+
+            // Tulis label (kiri)
+            doc.text(label, initialX, initialY, { width: labelWidth, align: "left" });
+
+            // Hitung X dan width untuk teks value
+            const valueX = initialX + labelWidth + marginLeft;
+            const maxWidth = doc.page.width - valueX - doc.page.margins.right;
+
+            // Tulis value (kanan, wrapping otomatis setelah titik dua)
+            doc.text(`${value}`, valueX, initialY, {
+                width: maxWidth,
+                align: "left",
+            });
+
+            // Hitung tinggi teks dan pindahkan posisi Y ke bawah
+            const textHeight = doc.heightOfString(`: ${value}`, {
+                width: maxWidth,
+            });
+
+            doc.y = initialY + textHeight;
+        };
+
+        // Header Logo
+        doc.image("public/images/_logo_und.png", 70, 40, { width: 60 }); // Ganti path logo sesuai file Anda
+
+        // Header Text
+        doc.font("Helvetica-Bold")
+            .fontSize(12)
+            .text("UNIVERSITAS DAYANU IKHSANUDDIN", { align: "center" })
+            .text("FAKULTAS TEKNIK", { align: "center" })
+            .text("PROGRAM STUDI TEKNIK INFORMATIKA", { align: "center" })
+            .moveDown(0.5)
+            .font("Courier")
+            .fontSize(9)
+            .text("Terakreditasi (S-1) No. 3084/SK/BAN-PT/Ak-PPJ/S/V/2020", { align: "center" })
+            .text("Kampus Palagimata Jl. Sultan Dayanu Ikhsanuddin No.124 Telp (0402) 2821327 Baubau", { align: "center" });
+
+        // Garis
+        doc.moveTo(50, 123).lineTo(545, 123).stroke();
+        doc.moveTo(50, 125).lineTo(545, 125).stroke();
+
+        // Nomor Surat
+        doc.moveDown(3)
+            .fontSize(12)
+            .font("Helvetica")
+            .text("Nomor", {
+                continued: true,
+            })
+            .text(`: ${nomorSurat}`, 76)
+            .moveDown(0)
+            .text("Lampiran", {
+                continued: true,
+            })
+            .text(`: -`, 63)
+            .moveDown(0)
+            .text("Hal", {
+                continued: true,
+            })
+            .text(`: UNDANGAN SEMINAR ${jenisUjian.toUpperCase()}`, 95)
+            .moveDown();
+
+        doc.moveDown().font("Helvetica").text("Kepada Yth,");
+        doc.moveDown()
+            .fontSize(12)
+            .font("Helvetica")
+            .text("1.", {
+                continued: true,
+            })
+            .font("Helvetica-Bold")
+            .text(` ${penguji1}`)
+            .moveDown(0)
+            .font("Helvetica")
+            .text("2.", {
+                continued: true,
+            })
+            .font("Helvetica-Bold")
+            .text(` ${penguji2}`)
+            .moveDown(0)
+            .font("Helvetica")
+            .text("3.", {
+                continued: true,
+            })
+            .font("Helvetica-Bold")
+            .text(` ${penguji3}`)
+            .moveDown(0);
+
+        doc.moveDown()
+            .fontSize(12)
+            .font("Helvetica")
+            .text("Dengan hormat,")
+            .moveDown(0.5)
+            .text(`Kami mengundang Bapak/Ibu, Saudara (i) untuk menghadiri Seminar Proposal bagi saudara (i) ${name.toUpperCase()} No. Stambuk ${numberID} Program Studi Teknik Informatika, yang akan dilaksanakan pada :`, {
+                lineGap: 2,
+                align: "justify",
+            })
+            .moveDown();
+
+        doc.fontSize(12)
+            .font("Helvetica")
+            .text("Hari/Tanggal", {
+                continued: true,
+            })
+            .text(`: ${hariUjian}`, 100)
+            .moveDown(0)
+            .text("Pukul", {
+                continued: true,
+            })
+            .text(`: ${date} Wita s/d Selesai`, 138)
+            .moveDown(0)
+            .text("Bertempat di", {
+                continued: true,
+            })
+            .text(`: R. Teknik Informatika`, 99)
+            .moveDown(0);
+
+        doc.fontSize(12).font("Helvetica").text("Judul                           :", {
+            continued: true,
+        });
+
+        createFormattedText(doc, "", `${judulUtama.toUpperCase()}`);
+
+        doc.x = 50;
+
+        doc.fontSize(12)
+            .font("Helvetica")
+            .text("Dosen Pembimbing", {
+                continued: true,
+            })
+            .text(`: `, 64)
+            .moveDown(0)
+            .text("Utama", {
+                continued: true,
+            })
+            .text(`: ${pembimbing1}`, 133)
+            .moveDown(0)
+            .text("Pendamping", {
+                continued: true,
+            })
+            .text(`: ${pembimbing2}`, 101)
+            .moveDown(0);
+
+        doc.moveDown().fontSize(12).font("Helvetica").text("Atas perhatian dan kehadirannya, disampaikan terima kasih", { lineGap: 2, align: "justify" }).moveDown().moveDown().moveDown();
+
+        doc.x = 300;
+
+        doc.fontSize(12)
+            .font("Helvetica")
+            .text(`${tanggalKeluar}`, {
+                align: "center",
+            })
+            .font("Helvetica-Bold")
+            .text("Kaprodi Teknik Informatika", {
+                align: "center",
+            })
+            .moveDown()
+            .moveDown()
+            .moveDown()
+            .moveDown()
+            .font("Helvetica")
+            .text(`Ir. ERY MUCHYAR HASIRI, S.Kom., M.T.`, {
+                align: "center",
+                underline: 1,
+            })
+            .font("Helvetica-Bold")
+            .text("NIDN. 0913098203", {
+                align: "center",
+            });
+
+        doc.end();
+
+        // Tunggu sampai PDF selesai dibuat
+        const pdfBuffer = await new Promise((resolve) => {
+            doc.on("end", () => {
+                const pdfData = Buffer.concat(pdfChunks);
+                resolve(pdfData);
+            });
+        });
+
+        // Upload ke Firebase Storage
+        const pdfName = `${Date.now()}-${thesis.userId}-${jenisUjian.toLowerCase()}.pdf`;
+        const file = bucket.file(`surat_undangan/${pdfName}`);
+
+        await file.save(pdfBuffer, {
+            metadata: {
+                contentType: "application/pdf",
+            },
+        });
+
+        // Dapatkan URL download
+        const [url] = await file.getSignedUrl({
+            action: "read",
+            expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+        });
 
         const targetDate = new Date(objData.date);
 
@@ -146,6 +381,8 @@ class ScheduleController {
         objData.penguji2 = objData.penguji2.toLowerCase();
         objData.penguji3 = objData.penguji3.toLowerCase();
         objData.date = new Date(`${date}T${time}:00`).toISOString("id-ID", { timeZone: "Asia/Makassar" });
+
+        // const objData = { thesisID, numberLetter, date, jenisUjian, name, numberID, judulUtama, tujuanUtama, pembimbing1, pembimbing2, penguji1, penguji2, penguji3 };
 
         const now = new Date().toLocaleString("id-ID", { timeZone: "Asia/Makassar" });
         const [dateStr] = now.split(", ");
@@ -169,6 +406,7 @@ class ScheduleController {
         }
 
         await Schedule.store(objData);
+        console.log("🚀 ~ ScheduleController ~ store ~ objData:", objData);
 
         return res.redirect("/schedule");
     }
@@ -218,7 +456,7 @@ class ScheduleController {
 
         schedule.name = capitalize(schedule.name);
         schedule.date = formatDateTime(schedule.date);
-        
+
         schedule.jenisUjian = capitalize(schedule.jenisUjian);
         schedule.judulUtama = capitalize(schedule.judulUtama);
         schedule.tujuanUtama = capitalize(schedule.tujuanUtama);

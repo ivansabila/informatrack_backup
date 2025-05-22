@@ -27,31 +27,35 @@
                                 <div class="flex flex-col gap-8">
                                     <div class="flex justify-between gap-8">
                                         <h1 class="font-base text-darkBlue w-96">Nama Lengkap</h1>
-                                        <p
-                                            class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
-                                            <%= data.thesis.name %>
-                                        </p>
+                                        <div class="flex flex-col flex-auto">
+                                            <input
+                                                class="border text-sm font-base flex-auto text-darkBlue bg-transparent outline-none h-10 px-4 border-grey"
+                                                required type="text" name="name" id="name" autocomplete="off" value="<%= data.thesis.name %>" readonly>
+                                        </div>
                                     </div>
                                     <div class="flex justify-between gap-8">
                                         <h1 class="font-base text-darkBlue w-96">Nomor Induk Mahasiswa (NIM)</h1>
-                                        <p
-                                            class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
-                                            <%= data.thesis.numberID %>
-                                        </p>
+                                        <div class="flex flex-col flex-auto">
+                                            <input
+                                                class="border text-sm font-base flex-auto text-darkBlue bg-transparent outline-none h-10 px-4 border-grey"
+                                                required type="text" name="numberID" id="numberID" autocomplete="off" value="<%= data.thesis.numberID %>" readonly>
+                                        </div>
                                     </div>
                                     <div class="flex justify-between gap-8">
                                         <h1 class="font-base text-darkBlue w-96">Judul Tugas Akhir</h1>
-                                        <p
-                                            class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
-                                            <%= data.thesis.judul %>
-                                        </p>
+                                        <div class="flex flex-col flex-auto">
+                                            <input
+                                                class="border text-sm font-base flex-auto text-darkBlue bg-transparent outline-none h-10 px-4 border-grey"
+                                                required type="text" name="judulUtama" id="judulUtama" autocomplete="off" value="<%= data.thesis.judul %>" readonly>
+                                        </div>
                                     </div>
                                     <div class="flex justify-between gap-8">
                                         <h1 class="font-base text-darkBlue w-96">Tujuan Judul Tugas Akhir</h1>
-                                        <p
-                                            class="border text-sm font-base flex-auto text-darkBlue px-4 py-2 leading-6 border-grey">
-                                            <%= data.thesis.tujuan %>
-                                        </p>
+                                        <div class="flex flex-col flex-auto">
+                                            <input
+                                                class="border text-sm font-base flex-auto text-darkBlue bg-transparent outline-none h-10 px-4 border-grey"
+                                                required type="text" name="tujuanUtama" id="tujuanUtama" autocomplete="off" value="<%= data.thesis.tujuan %>" readonly>
+                                        </div>
                                     </div>
                                     <div class="flex justify-between gap-8">
                                         <h1 class="font-base text-darkBlue w-96">Dosen Pembimbing Utama</h1>

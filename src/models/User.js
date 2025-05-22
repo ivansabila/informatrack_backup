@@ -13,7 +13,6 @@ class User {
     static async get(uid) {
         const snapshot = await app.ref(`users/${uid}`).once("value");
         const data = snapshot.val();
-
         return data;
     }
 

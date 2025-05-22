@@ -19,7 +19,8 @@
     "express": "^5.1.0",
     "express-session": "^1.18.1",
     "firebase": "^11.7.3",
-    "firebase-admin": "^13.3.0"
+    "firebase-admin": "^13.3.0",
+    "pdfkit": "^0.17.1"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.4",

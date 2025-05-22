@@ -27,6 +27,16 @@ class Schedule {
 
         return data;
     }
+
+    static async getNumberLetter() {
+        const result = await app.ref(`numberLetter/prodi`).transaction((currentValue) => {
+            return (currentValue || 0) + 1;
+        });
+
+        const data = result.snapshot.val();
+
+        return data
+    }
 }
 
 export default Schedule;
