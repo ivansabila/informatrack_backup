@@ -10,7 +10,7 @@
         <%- include("./partials/navbar.ejs") %>
             <div class="flex">
                 <%- include("./partials/sidebar.ejs") %>
-                    <div class="flex flex-col ml-72 p-6 w-full gap-10">
+                    <div class="flex flex-col ml-72 p-6 w-full h-screen gap-10 bg-[url(/images/gedung_und.jpg)] bg-cover bg-center bg-fixed">
                         <!-- start program -->
                         <!-- start title -->
                         <div class="flex flex-col">
@@ -25,7 +25,7 @@
                         <div class="flex flex-col w-full gap-8">
                             <div class="flex gap-8">
                                 <!-- start approved user -->
-                                <a class="approvedUser flex flex-col w-1/2 bg-secWhite p-4 gap-4 hover:bg-secBlue/10 cursor-pointer group"
+                                <a class="approvedUser flex flex-col w-1/2 bg-secWhite p-4 gap-4  cursor-pointer group"
                                     href="/users/unapproved">
                                     <div class="flex items-center gap-4">
                                         <div
@@ -59,7 +59,7 @@
                                 </a>
                                 <!-- end approved user -->
                                 <!-- start approved judul -->
-                                <a class="approvedThesis flex flex-col w-1/2 bg-secWhite p-4 gap-4 hover:bg-secBlue/10 cursor-pointer group"
+                                <a class="approvedThesis flex flex-col w-1/2 bg-secWhite p-4 gap-4  cursor-pointer group"
                                     href="/activity/unapproved">
                                     <div class=" flex items-center gap-4">
                                         <div
@@ -93,7 +93,7 @@
                                 <!-- end approved judul -->
                                 <!-- start pengajuan ujian -->
                                 <a
-                                    class="approvedSchedule flex flex-col w-1/2 bg-secWhite p-4 gap-4  hover:bg-secBlue/10 cursor-pointer group" href="/schedule">
+                                    class="approvedSchedule flex flex-col w-1/2 bg-secWhite p-4 gap-4   cursor-pointer group" href="/schedule">
                                     <div class="flex items-center gap-4">
                                         <div
                                             class="w-12 h-12 flex justify-center items-center bg-white group-hover:bg-darkBlue">
