@@ -32,7 +32,6 @@
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
     --radius-lg: 0.5rem;
-    --blur-md: 12px;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
     --font-base: "Space Grotesk";
@@ -462,17 +461,11 @@
   .bg-white {
     background-color: var(--color-white);
   }
-  .bg-\[url\(\/images\/gedung_und\.jpg\)\] {
-    background-image: url(/images/gedung_und.jpg);
-  }
   .bg-\[url\(\/images\/pattern\.png\)\] {
     background-image: url(/images/pattern.png);
   }
   .bg-cover {
     background-size: cover;
-  }
-  .bg-fixed {
-    background-attachment: fixed;
   }
   .bg-center {
     background-position: center;

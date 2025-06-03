@@ -2,6 +2,7 @@ import { onRequest } from "firebase-functions/v2/https";
 import { logger } from "firebase-functions";
 import admin from "firebase-admin";
 import { onSchedule } from "firebase-functions/scheduler";
+import { log } from "firebase-functions/logger";
 
 admin.initializeApp();
 
@@ -44,8 +45,16 @@ export const announceThesis = onSchedule(
         timeZone: "Asia/Makassar",
     },
     async () => {
-        const now = new Date().toLocaleString("id-ID", { timeZone: "Asia/Makassar" });
-        const dateNow = now.split(", ")[1].replace(/\./g, ":").substring(0, 5);
+        const dateNow = new Date()
+            .toLocaleDateString("id-ID", {
+                timeZone: "Asia/Makassar",
+                year: "numeric",
+                month: "2-digit",
+                day: "2-digit",
+            })
+            .split("/")
+            .reverse()
+            .join("-");
 
         const snapshot = await app.ref(`pengajuan_judul`).once("value");
         const thesis = snapshot.val();
@@ -53,14 +62,15 @@ export const announceThesis = onSchedule(
         const getStartTime = (await app.ref(`submissionTime`).once("value")).val();
         const startTime = getStartTime?.startTime;
 
-        logger.info(startTime);
-
-        if (!startTime || !/^\d{2}:\d{2}$/.test(startTime)) {
+        if (!startTime || !/^\d{4}-\d{2}-\d{2}$/.test(startTime)) {
             logger.warn("Start time is invalid or missing:", startTime);
             return;
         }
 
         const updates = {};
+
+        logger.info("🚀 ~ dateNow:", dateNow);
+        logger.info("🚀 ~ startTime:", startTime);
 
         if (dateNow >= startTime) {
             for (const [uid, data] of Object.entries(thesis)) {

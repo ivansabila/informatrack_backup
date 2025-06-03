@@ -38,7 +38,7 @@ class DashboardController {
 
         if (thesis) {
             countThesisSubmission = Object.entries(thesis).filter(([uid, thesis]) => {
-                return thesis.isApproved == false;
+                return thesis.status == "under review";
             }).length;
 
             countAllThesis = Object.entries(thesis).filter(([uid, thesis]) => {
